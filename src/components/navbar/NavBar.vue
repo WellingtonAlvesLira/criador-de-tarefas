@@ -1,5 +1,5 @@
 <template>
-  <v-container container>
+  <v-container>
     <div id="nav_bar">
       <img
         id="img_nav_bar"
