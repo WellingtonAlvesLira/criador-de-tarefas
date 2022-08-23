@@ -6,15 +6,15 @@
     class="elevation-1"
   >
     <template v-slot:top>
-      <v-toolbar flat>
+    <v-toolbar flat>
         <v-toolbar-title >LISTA DE TAREFAS</v-toolbar-title>
         <v-divider class="mx-5" inset vertical></v-divider>
         <v-spacer></v-spacer>
       </v-toolbar>
     </template>
-    <template v-slot:[`item.actions`]="{ item }" >
+    <template v-slot:[`item.actions`]="{ item }">
         <i @click="editTarefa(item.id)" class="fa fa-pencil-square-o fa-2x d-block ma-1"></i>
-        <i @click="deleteTarefa(item.id)" class="fa fa-trash-o fa-2x ma-1"></i>
+        <i @click.prevent=deleteTarefa(item.id) class="fa fa-trash-o fa-2x ma-1"></i>
     </template>
   </v-data-table>
   </v-container>
@@ -31,7 +31,7 @@ import API from "@/api/api.js";
     dialog: false,
     headers: [
       {
-        text: "ID",
+        text: "Id",
         align: "start",
         sortable: false,
         value: "id",
@@ -47,10 +47,10 @@ import API from "@/api/api.js";
 
    created() {
     //listando pedidos que foram realizados pelo usuário.
-    this.listarPedidos();
+    this.listarTarefa();
   },
   methods: {
-    listarPedidos() {
+    listarTarefa() {
       this.get("/tarefas").then((resposta) => {
         this.desserts = resposta.data;
       });
@@ -60,14 +60,18 @@ import API from "@/api/api.js";
       alert(id)
     },
 
-    deleteTarefa(id){
-      alert(id)
-    }
+   deleteTarefa(itemId) {
+          this.delete(`/tarefas/${itemId}`).then((resposta) => {
+          if (resposta.data){
+            alert('Tem certeza ?')
+             this.listarTarefa();
+          }
+        });
+    },
 
   }
   }
 </script>
 
 <style scoped>
-
 </style>

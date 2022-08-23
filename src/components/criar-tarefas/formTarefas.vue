@@ -124,6 +124,7 @@ export default {
   position: relative;
   bottom: 48px;
   left: 35%;
+  transform:  rotate(-45deg);
 }
 #showSucesso1 {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
